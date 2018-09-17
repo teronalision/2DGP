@@ -10,8 +10,13 @@ right = True
 
 
 def move_to(dx, dy): #목표로
-    global x, y
+    global x, y, right
     cx, cy = x, y
+    if dx - cx > 0:
+        right = True
+    else:
+        right = False
+        
     i = 0
     while i <30 :
         x += (dx -cx)/30

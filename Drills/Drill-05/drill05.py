@@ -42,11 +42,20 @@ def move_from_left_to_center():
         x += 2
         delay(0.01)
 
+def move_from_right_to_left():
+    x, y = 800 -25, 600 -50
+    while x > 25:
+        clear_canvas_now()
+        grass.draw_now(400,30)
+        character.draw_now(x,y)
+        x -= 2
+        delay(0.01)
 
 def make_rectangle():
-    #move_form_center_to_right()
-    #move_up()
-    #move_down()
+    move_form_center_to_right()
+    move_up()
+    move_from_right_to_left()
+    move_down()
     move_from_left_to_center()
     
 

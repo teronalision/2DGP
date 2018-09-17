@@ -2,27 +2,32 @@ from pico2d import *
 open_canvas()
 
 grass = load_image('grass.png')
-character = load_image('animation_shet.png')
+character = load_image('animation_sheet.png')
 
-point = ((203, 535),(132, 243),(535, 470),(477,203),(715, 136),(316, 225),(510, 92),(692, 518),(682, 336),(712, 349))
-x, y = 800 //2, 600 //2
+x, y = 0, 0
 frame = 0
 right = True
 
 
-def move_to((dx, dy)):
-    while !(x == dx && y == dy):
+def move_to(dx, dy): #목표로
+    cx, cy = x, y
+    while x != dx:
+        x += (dx -cx)//30
+        y += (dy -cy)//30
+        
         cDraw()
+        
 
-def cDraw():
+def cDraw(): #그리기
     clear_canvas()
     character.clip_draw(frame*100 ,right*100 ,100 ,100 ,x ,y)
     update_canvas()
 
+
 #메인
 while True:
-    for dst in point:
-        move_to(dst)
+    for ix, iy in  (203, 535):
+        move_to(ix, iy)
     
     
 close_canvas()

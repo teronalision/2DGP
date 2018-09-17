@@ -23,10 +23,10 @@ def move_to(dx, dy): #목표로
 def cDraw(): #그리기
     global frame
     clear_canvas()
-    character.clip_draw(frame*100 ,right*100 ,100 ,100 ,x ,y)
+    character.clip_draw(frame//3*100 ,right*100 ,100 ,100 ,x ,y)
     update_canvas()
     delay(1/30)
-    frame = (frame +1) %8
+    frame = (frame +1) %24
 
 
 #메인

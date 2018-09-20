@@ -4,14 +4,15 @@ KPU_WIDTH, KPU_HEIGHT = 1280, 1024
 running = True
 x, y = KPU_WIDTH // 2, KPU_HEIGHT // 2 #캐릭터
 mx, my = 0, 0 #마우스
-dx, dy = 0, 0 #목적지
+dx, dy = x, y #목적지
 frame = 0
 hide_cursor()
 dir = 0
 
 def move_to(dx, dy): #목표로
     global x, y
-
+    global dir
+    
     a = dx - x
     b = dy - y
 
@@ -25,6 +26,8 @@ def move_to(dx, dy): #목표로
 
     if dx > x:
         dir = 1
+    elif dx == x:
+        dir = 0
     else:
         dir = -1
 
@@ -56,7 +59,7 @@ while running:
     kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
     hand.draw(mx,my)
     if dir != 0:
-        character.clip_draw(frame * 100, 100 * (dir+1)/2, 100, 100, x, y)
+        character.clip_draw(frame * 100, 100, 100, 100, x, y)
         frame = (frame + 1) % 8
     else:
         character.clip_draw(0,300,100,100,x,y)

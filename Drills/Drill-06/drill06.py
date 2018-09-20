@@ -6,7 +6,6 @@ x, y = KPU_WIDTH // 2, KPU_HEIGHT // 2 #캐릭터
 mx, my = 0, 0 #마우스
 dx, dy = x, y #목적지
 frame = 0
-hide_cursor()
 dir = 0
 
 def move_to(dx, dy): #목표로
@@ -52,7 +51,7 @@ open_canvas(KPU_WIDTH, KPU_HEIGHT)
 kpu_ground = load_image('KPU_GROUND.png')
 character = load_image('animation_sheet.png')
 hand = load_image('hand_arrow.png')
-
+hide_cursor()
 
 while running:
     clear_canvas()
@@ -69,7 +68,7 @@ while running:
 
     move_to(dx,dy)
     update_canvas()
-    delay(0.02)
+    delay(0.05)
     handle_events()
 
 close_canvas()

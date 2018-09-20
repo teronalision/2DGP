@@ -13,11 +13,14 @@ dir = 0
 def handle_events():
     global running
     global mx, my
+    global dx, dy
     events = get_events()
 
     for event in events:
         if event.type == SDL_QUIT:
             running = False
+        elif event.type == SDL_MOUSEBUTTONDOWN:
+            dx, dy = event.x -25, KPU_HEIGHT - 26 - event.y
         elif event.type == SDL_MOUSEMOTION:
             mx, my = event.x, KPU_HEIGHT - 1 - event.y
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
@@ -35,7 +38,7 @@ while running:
     kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
     hand.draw(mx,my)
     if dir != 0:
-        character.clip_draw(frame * 100, 100 * (dir+1)/2, 100, 100, cx, cy)
+        character.clip_draw(frame * 100, 100 * (dir+1)/2, 100, 100, dx, dy)
         frame = (frame + 1) % 8
     else:
         character.clip_draw(0,300,100,100,cx,cy)

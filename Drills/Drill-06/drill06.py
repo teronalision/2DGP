@@ -2,13 +2,20 @@ from pico2d import *
 
 KPU_WIDTH, KPU_HEIGHT = 1280, 1024
 running = True
-cx, cy = KPU_WIDTH // 2, KPU_HEIGHT // 2 #캐릭터
+x, y = KPU_WIDTH // 2, KPU_HEIGHT // 2 #캐릭터
 mx, my = 0, 0 #마우스
 dx, dy = 0, 0 #목적지
 frame = 0
 hide_cursor()
 dir = 0
 
+def move_to(dx, dy): #목표로
+    global x, y
+
+    k = (dy - y) // (dx - x)
+
+    x = x + k*5
+    y = y + 3
 
 def handle_events():
     global running
@@ -38,12 +45,12 @@ while running:
     kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
     hand.draw(mx,my)
     if dir != 0:
-        character.clip_draw(frame * 100, 100 * (dir+1)/2, 100, 100, dx, dy)
+        character.clip_draw(frame * 100, 100 * (dir+1)/2, 100, 100, x, y)
         frame = (frame + 1) % 8
     else:
-        character.clip_draw(0,300,100,100,cx,cy)
+        character.clip_draw(0,300,100,100,x,y)
 
-    
+    move_to(dx,dy)
     update_canvas()
     delay(0.02)
     handle_events()

@@ -15,6 +15,11 @@ def move_to(dx, dy): #목표로
     a = dx - x
     b = dy - y
 
+    if abs(a) > 10:
+        a /= 2
+    if abs(b) > 10:
+        b /= 2
+
     x = x + a/10
     y = y + b/10
 

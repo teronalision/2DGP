@@ -7,6 +7,7 @@ mx, my = 0, 0 #마우스
 dx, dy = 0, 0 #목적지
 frame = 0
 hide_cursor()
+dir = 0
 
 
 def handle_events():
@@ -26,16 +27,21 @@ def handle_events():
 open_canvas(KPU_WIDTH, KPU_HEIGHT)
 kpu_ground = load_image('KPU_GROUND.png')
 character = load_image('animation_sheet.png')
-
+hand = load_image('hand_arrow.png')
 
 
 while running:
     clear_canvas()
     kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
-    character.clip_draw(frame * 100, 100 * 1, 100, 100, mx, my)
-    update_canvas()
-    frame = (frame + 1) % 8
+    hand.draw(mx,my)
+    if dir != 0:
+        character.clip_draw(frame * 100, 100 * (dir+1)/2, 100, 100, cx, cy)
+        frame = (frame + 1) % 8
+    else:
+        character.clip_draw(0,300,100,100,cx,cy)
 
+    
+    update_canvas()
     delay(0.02)
     handle_events()
 

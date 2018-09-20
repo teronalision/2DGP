@@ -12,10 +12,16 @@ dir = 0
 def move_to(dx, dy): #목표로
     global x, y
 
-    k = (dy - y) // (dx - x)
+    a = dx - x
+    b = dy - y
 
-    x = x + k*5
-    y = y + 3
+    x = x + a/10
+    y = y + b/10
+
+    if dx > x:
+        dir = 1
+    else:
+        dir = -1
 
 def handle_events():
     global running

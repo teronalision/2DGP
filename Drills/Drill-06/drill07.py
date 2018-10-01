@@ -14,6 +14,7 @@ points = [(random.randint(-200,200),random.randint(-200,200)) for n in range(20)
 
 def draw():
     global frame
+
     
     pico2d.clear_canvas()
     BG.draw(400,300)

@@ -33,8 +33,9 @@ def move(p1,p2):
         
 
 while True:
+
     
-    move(points[n-1],points[n])
+    move((0,0),(100,100))
     
     n = (n+1) %20
 

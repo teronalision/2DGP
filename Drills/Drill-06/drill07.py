@@ -8,26 +8,34 @@ charicter = pico2d.load_image('animation_sheet.png')
 x, y = 400, 300
 frame = 0
 right = True
+n = 1
 
 points = [(random.randint(-300,-300),random.randint(-300,-300)) for n in range(20)]
-idx = 0
 
 def draw():
+    global frame
+    
     pico2d.clear_canvas()
     BG.draw(400,300)
     charicter.clip_draw(frame*100,right*100,100,100,x,y)
     
     pico2d.update_canvas()
     pico2d.delay(1/30)
+    frame=(frame+1) %8
 
-def move():
+def move(p1,p2):
     global x, y, idx
-    x, y = points[idx]
-    idx = (idx+1)%20
+    for i in range(0, 100 +1, 4):
+        t = i /100
+        x = (1-t)*p1[0] +t*p2[0]
+        y = (1-t)*p1[1] +t*p2[1]
+        draw()
+        
 
 while True:
     
-    draw()
-    frame=(frame+1) %8
+    move(points[n-1],points[n])
+    
+    n = (n+1) %20
 
 pico2d.close_canvas()

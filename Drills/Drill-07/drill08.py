@@ -14,16 +14,17 @@ n = 0
 points = [(random.randint(-200, 200), random.randint(-200, 200)) for n in range(10)]
 #points = [(0,0),(800,100),(600,200),(400,600)]
 
+
 def draw():
     global frame
 
     pico2d.clear_canvas()
     BG.draw(400, 300)
-    charicter.clip_draw(frame * 100, right * 100, 100, 100, x + 400, y + 300)
+    charicter.clip_draw(frame//3 * 100, right * 100, 100, 100, x + 400, y + 300)
 
     pico2d.update_canvas()
     pico2d.delay(1 / 30)
-    frame = (frame + 1) % 8
+    frame = (frame + 1) % 24
 
 
 def move_sec_to_thr(p1, p2, p3, p4):
@@ -32,6 +33,7 @@ def move_sec_to_thr(p1, p2, p3, p4):
         right = False
     else:
         right = True
+
 
     for i in range(0, 100 + 1, 2):
         t = i / 100

@@ -12,7 +12,7 @@ right = True
 n = 0
 
 points = [(random.randint(-200, 200), random.randint(-200, 200)) for n in range(10)]
-
+#points = [(0,0),(800,100),(600,200),(400,600)]
 
 def draw():
     global frame
@@ -28,7 +28,7 @@ def draw():
 
 def move_sec_to_thr(p1, p2, p3, p4):
     global x, y, idx, right
-    if p2[0] - p1[0] < 0:
+    if p3[0] - p2[0] < 0:
         right = False
     else:
         right = True
@@ -41,8 +41,13 @@ def move_sec_to_thr(p1, p2, p3, p4):
 
 
 while True:
-    move_sec_to_thr(points[n], points[n+1],points[n+2],points[n+3])
+    n1 = n
+    n2 = (n1+1)%10
+    n3 = (n2+1)%10
+    n4 = (n3+1)%10
+    
+    move_sec_to_thr(points[n1], points[n2],points[n3],points[n4])
 
-    n = (n + 1) % 20
+    n = (n + 1) % 10
 
 pico2d.close_canvas()

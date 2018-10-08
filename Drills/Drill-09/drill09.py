@@ -55,6 +55,7 @@ class Ball:
         if self.y < 70 +self.size:
             self.y = 70 +self.size
 
+
 # initialization code
 running = True
 open_canvas()

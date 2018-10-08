@@ -34,11 +34,22 @@ class Grass:
     def draw(self):
         self.image.draw(400, 30)
 
+
+class Ball:
+    def __init__(self):
+        self.x, self.y = 0, 600
+        self.image = load_image('ball21x21.png')
+
+    def draw(self):
+        self.image.draw(self.x, self.y)
+
+
 # initialization code
 running = True
 open_canvas()
 
 team = [Boy() for i in range(11)]
+balls = [Ball() for i in range(20)]
 grass = Grass()
 
 # game main loop code
@@ -49,9 +60,15 @@ while running:
     for boy in team:
         boy.update()
 
+
+
     clear_canvas()
     grass.draw()
-    boy.draw()
+    for boy in team:
+        boy.draw()
+    for ball in balls:
+        ball.draw()
+        
     update_canvas()
 
     delay(0.05)

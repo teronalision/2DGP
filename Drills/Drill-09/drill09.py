@@ -15,7 +15,7 @@ def handle_events():
 
 class Boy:
     def __init__(self):
-        self.x, self.y = random.randint(0, 700), 90
+        self.x, self.y = random.randint(0, 600), 90
         self.frame = random.randint(0, 7)
         self.image = load_image('run_animation.png')
 
@@ -37,12 +37,18 @@ class Grass:
 
 class Ball:
     def __init__(self):
-        self.x, self.y = 0, 600
+        self.x, self.y = random.randint(0,800), 600
+        self.speed = random.randint(1,8)
         self.image = load_image('ball21x21.png')
 
     def draw(self):
         self.image.draw(self.x, self.y)
 
+    def update(self):
+        if self.y > 90:
+            self.y -= self.speed
+        if self.y < 90:
+            self.y = 90
 
 # initialization code
 running = True
@@ -59,7 +65,8 @@ while running:
 
     for boy in team:
         boy.update()
-
+    for ball in balls:
+        ball.update()
 
 
     clear_canvas()
@@ -68,7 +75,7 @@ while running:
         boy.draw()
     for ball in balls:
         ball.draw()
-        
+
     update_canvas()
 
     delay(0.05)

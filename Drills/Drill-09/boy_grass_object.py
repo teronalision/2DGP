@@ -1,5 +1,6 @@
 from pico2d import *
 
+
 # Game object class here
 
 def handle_events():
@@ -12,7 +13,17 @@ def handle_events():
             running = False
 
 # initialization code
+running = True
+open_canvas()
+
+boy = Boy()
+grass = Grass()
 
 # game main loop code
+
+while running:
+    handle_events()
+    delay(1)
+close_canvas()
 
 # finalization code

@@ -1,4 +1,4 @@
-import game_farmework
+import game_framework
 import main_state
 from pico2d import *
 
@@ -23,11 +23,16 @@ def handle_events():
         if event.type == SDL_QUIT:
             game_framework.quit()
         else:
-            if (event.type, event.key) == (SDL_KEYDOWN, SDLK_Q):
-                game_framework.quit()
+            if (event.type, event.key) == (SDL_KEYDOWN, SDLK_p):
+                game_framework.change_state(main_state)
 
 
 def draw():
     clear_canvas()
     image.draw(400, 300)
     update_canvas()
+
+
+def update():
+
+    handle_events()

@@ -13,8 +13,9 @@ def enter():
 
 
 def exit():
-    global image
+    global image,time
     del(image)
+    time = 0
 
 
 def handle_events():
@@ -40,5 +41,5 @@ def draw():
 def update():
     global time
     time +=1
-
     handle_events()
+    delay(0.2)

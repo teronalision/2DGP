@@ -81,7 +81,7 @@ class RunState:
     def do(boy):
         boy.frame = (boy.frame + 1) % 8
         boy.timer -= 1
-        boy.x += boy.velocity *3
+        boy.x += boy.velocity
         boy.x = clamp(25, boy.x, 1600 - 25)
 
     @staticmethod
@@ -119,13 +119,13 @@ class DashState:
     @staticmethod
     def enter(boy, event):
         if event == RIGHT_DOWN:
-            boy.velocity += 2
+            boy.velocity += 1
         elif event == LEFT_DOWN:
-            boy.velocity -= 2
+            boy.velocity -= 1
         elif event == RIGHT_UP:
-            boy.velocity -= 2
+            boy.velocity -= 1
         elif event == LEFT_UP:
-            boy.velocity += 2
+            boy.velocity += 1
         boy.dir = boy.velocity
 
     @staticmethod
@@ -152,10 +152,10 @@ class DashState:
 
 
 next_state_table = {
-    IdleState: {RIGHT_UP: RunState, LEFT_UP: RunState, RIGHT_DOWN: RunState, LEFT_DOWN: RunState, SLEEP_TIMER: SleepState, SPACE: IdleState},
-    RunState: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: RunState, DASH: DashState},
+    IdleState: {RIGHT_UP: RunState, LEFT_UP: RunState, RIGHT_DOWN: RunState, LEFT_DOWN: RunState, SLEEP_TIMER: SleepState, SPACE: IdleState, DASH_DOWN: IdleState, DASH_UP: IdleState},
+    RunState: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: RunState, DASH_DOWN: DashState},
     SleepState: {LEFT_DOWN: RunState, RIGHT_DOWN: RunState, LEFT_UP: RunState, RIGHT_UP: RunState, SPACE: SleepState},
-    DashState: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: DashState}
+    DashState: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: DashState, DASH_UP: RunState}
 }
 
 class Boy:
@@ -198,4 +198,5 @@ class Boy:
         if (event.type, event.key) in key_event_table:
             key_event = key_event_table[(event.type, event.key)]
             self.add_event(key_event)
+            print(key_event)
 

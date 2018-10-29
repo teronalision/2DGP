@@ -115,6 +115,8 @@ class SleepState:
 
     @staticmethod
     def enter(boy, event):
+        global downTimer, o,Gdegree
+        downTimer,Gdegree, o = 2.0, 0, 0
         boy.frame = 0
 
     @staticmethod
@@ -134,17 +136,16 @@ class SleepState:
     def draw(boy):
         global o
 
-        boy.image.opacify(1)
         if boy.dir == 1:
             boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, 3.141592 / 2, '', boy.x - 25, boy.y - 25, 100, 100)
         else:
             boy.image.clip_composite_draw(int(boy.frame) * 100, 200, 100, 100, -3.141592 / 2, '', boy.x + 25, boy.y - 25, 100, 100)
 
         if boy.frame <1:
-            o = random.randint(0,100) / 100.0
+            o = random.randint(2,8) / 10.0
         boy.image.opacify(o)
         boy.image.clip_draw(int(boy.frame) * 100, 300, 100, 100, boy.x + math.sin(math.radians(Gdegree+180))*PIXEL_PER_METER*3, boy.y +3*PIXEL_PER_METER +math.cos(math.radians(Gdegree+180))*PIXEL_PER_METER*3)
-
+        boy.image.opacify(1)
 
 
 

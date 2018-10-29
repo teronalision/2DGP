@@ -3,6 +3,7 @@ from pico2d import *
 from ball import Ball
 
 import math
+import random
 import game_world
 
 # Boy Run Speed
@@ -26,7 +27,7 @@ Gdegree = 0
 R_per_time = 2
 full_per_R = 360.0
 
-
+o=0.0
 
 # Boy Event
 RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, SLEEP_TIMER, SPACE = range(6)
@@ -131,14 +132,18 @@ class SleepState:
 
     @staticmethod
     def draw(boy):
+        global o
+
         boy.image.opacify(1)
         if boy.dir == 1:
             boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, 3.141592 / 2, '', boy.x - 25, boy.y - 25, 100, 100)
         else:
             boy.image.clip_composite_draw(int(boy.frame) * 100, 200, 100, 100, -3.141592 / 2, '', boy.x + 25, boy.y - 25, 100, 100)
 
-        boy.image.opacify(0.3)
-        boy.image.clip_draw(int(boy.frame) * 100, 300, 100, 100, boy.x + math.sin(math.radians(Gdegree+180))*PIXEL_PER_METER*3, boy.y +math.cos(math.radians(Gdegree+180))*PIXEL_PER_METER*3)
+        if boy.frame <1:
+            o = random.randint(0,100) / 100.0
+        boy.image.opacify(o)
+        boy.image.clip_draw(int(boy.frame) * 100, 300, 100, 100, boy.x + math.sin(math.radians(Gdegree+180))*PIXEL_PER_METER*3, boy.y +3*PIXEL_PER_METER +math.cos(math.radians(Gdegree+180))*PIXEL_PER_METER*3)
 
 
 

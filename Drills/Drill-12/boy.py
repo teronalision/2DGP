@@ -23,7 +23,7 @@ FRAMES_PER_ACTION = 8
 downTimer = 2.0
 Gdegree = 0
 
-R_per_time = 0.5
+R_per_time = 2
 full_per_R = 360.0
 
 
@@ -138,7 +138,7 @@ class SleepState:
             boy.image.clip_composite_draw(int(boy.frame) * 100, 200, 100, 100, -3.141592 / 2, '', boy.x + 25, boy.y - 25, 100, 100)
 
         boy.image.opacify(0.3)
-        boy.image.clip_draw(int(boy.frame) * 100, 300, 100, 100, boy.x + math.sin(Gdegree)*PIXEL_PER_METER*3, boy.y +math.cos(Gdegree)*PIXEL_PER_METER*3)
+        boy.image.clip_draw(int(boy.frame) * 100, 300, 100, 100, boy.x + math.sin(math.radians(Gdegree))*PIXEL_PER_METER*3, boy.y +math.cos(math.radians(Gdegree))*PIXEL_PER_METER*3)
 
 
 

@@ -46,7 +46,7 @@ class IdleState:
             boy.velocity -= RUN_SPEED_PPS
         elif event == LEFT_UP:
             boy.velocity += RUN_SPEED_PPS
-        boy.timer = 10.0
+        boy.timer = 1.0
 
     @staticmethod
     def exit(boy, event):

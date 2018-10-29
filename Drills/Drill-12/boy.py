@@ -143,8 +143,10 @@ class SleepState:
 
         if boy.frame <1:
             o = random.randint(2,8) / 10.0
+        if downTimer >0:
+            o = 0.5 - downTimer/4
         boy.image.opacify(o)
-        boy.image.clip_draw(int(boy.frame) * 100, 300, 100, 100, boy.x + math.sin(math.radians(Gdegree+180))*PIXEL_PER_METER*3, boy.y +3*PIXEL_PER_METER +math.cos(math.radians(Gdegree+180))*PIXEL_PER_METER*3)
+        boy.image.clip_draw(int(boy.frame) * 100, 300, 100, 100, boy.x + math.sin(math.radians(Gdegree+180))*PIXEL_PER_METER*3, boy.y +3*PIXEL_PER_METER +math.cos(math.radians(Gdegree+180))*PIXEL_PER_METER*3 -downTimer*20)
         boy.image.opacify(1)
 
 

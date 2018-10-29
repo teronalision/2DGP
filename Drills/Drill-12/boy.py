@@ -46,7 +46,7 @@ class IdleState:
             boy.velocity -= RUN_SPEED_PPS
         elif event == LEFT_UP:
             boy.velocity += RUN_SPEED_PPS
-        boy.timer = 1000
+        boy.timer = 10.0
 
     @staticmethod
     def exit(boy, event):
@@ -57,8 +57,8 @@ class IdleState:
     @staticmethod
     def do(boy):
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
-        boy.timer -= 1
-        if boy.timer == 0:
+        boy.timer -= game_framework.frame_time
+        if boy.timer < 0:
             boy.add_event(SLEEP_TIMER)
 
     @staticmethod
@@ -118,11 +118,14 @@ class SleepState:
 
     @staticmethod
     def draw(boy):
+        boy.image.opacify(1)
         if boy.dir == 1:
             boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, 3.141592 / 2, '', boy.x - 25, boy.y - 25, 100, 100)
         else:
             boy.image.clip_composite_draw(int(boy.frame) * 100, 200, 100, 100, -3.141592 / 2, '', boy.x + 25, boy.y - 25, 100, 100)
 
+        boy.image.opacify(0.3)
+        boy.image.clip_draw(int(boy.frame) * 100, 300, 100, 100, boy.x, boy.y)
 
 
 

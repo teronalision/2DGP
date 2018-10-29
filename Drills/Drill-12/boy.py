@@ -20,6 +20,13 @@ ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
 FRAMES_PER_ACTION = 8
 
 
+downTimer = 2.0
+Gdegree = 0
+
+R_per_time = 0.5
+full_per_R = 360.0
+
+
 
 # Boy Event
 RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, SLEEP_TIMER, SPACE = range(6)
@@ -104,11 +111,6 @@ class RunState:
 
 
 class SleepState:
-    downTimer = 2.0
-    Gdegree = 0
-
-    R_per_time = 0.5
-    full_per_R = 360.0
 
     @staticmethod
     def enter(boy, event):
@@ -120,6 +122,7 @@ class SleepState:
 
     @staticmethod
     def do(boy):
+        global downTimer, Gdegree
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
         if downTimer > 0:
             downTimer -= game_framework.frame_time
@@ -135,7 +138,7 @@ class SleepState:
             boy.image.clip_composite_draw(int(boy.frame) * 100, 200, 100, 100, -3.141592 / 2, '', boy.x + 25, boy.y - 25, 100, 100)
 
         boy.image.opacify(0.3)
-        boy.image.clip_draw(int(boy.frame) * 100, 300, 100, 100, boy.x + sin(Gdegree), boy.y)
+        boy.image.clip_draw(int(boy.frame) * 100, 300, 100, 100, boy.x + math.sin(Gdegree), boy.y)
 
 
 

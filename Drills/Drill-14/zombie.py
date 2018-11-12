@@ -70,7 +70,10 @@ class Zombie:
         move_to_player_node = LeafNode("Move to Player", self.move_to_player)
         chase_node = SequenceNode("Chase")
         chase_node.add_children(find_player_node,move_to_player_node)
-        self.bt = BehaviorTree(chase_node)
+        wander_node = LeafNode("Wander", self.wander)
+        WanderChase_node = SelectorNode("WanderChase")
+        WanderChase_node.add_children(chase_node,wander_node)
+        self.bt = BehaviorTree(WanderChase_node)
 
 
     def get_bb(self):
@@ -85,7 +88,7 @@ class Zombie:
         self.y += self.speed *math.sin(self.dir)* game_framework.frame_time
 
         self.x = clamp(50, self.x, 1280 -50)
-        self.y = clamp(50, self.x, 1024 -50)
+        self.y = clamp(50, self.y, 1024 -50)
 		
 
 

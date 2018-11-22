@@ -122,11 +122,13 @@ class Boy:
         self.cur_state.enter(self, None)
         self.eat_se = load_wav('pickup.wav')
         self.eat_se.set_volume(32)
+        self.eat_counter = 0
 
     def get_bb(self):
         return self.x - 50, self.y - 50, self.x + 50, self.y + 50
 
     def eat(self,ball):
+        self.eat_counter += 1
         self.eat_se.play()
         pass
 
@@ -148,7 +150,7 @@ class Boy:
 
     def draw(self):
         self.cur_state.draw(self)
-        self.font.draw(self.x-self.bg.window_left-70,self.y-self.bg.window_bottom +60, '(%5d, %5d)' % (self.x, self.y), (255, 255, 0))
+        self.font.draw(self.x-self.bg.window_left,self.y-self.bg.window_bottom +60, '%3r' %self.eat_counter, (255, 255, 0))
 
     def handle_event(self, event):
         if (event.type, event.key) in key_event_table:

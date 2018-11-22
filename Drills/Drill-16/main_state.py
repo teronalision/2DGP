@@ -45,7 +45,7 @@ def enter():
     game_world.add_object(back, 0)
 
     global balls
-    balls = [Ball(back) for i in range(10)]
+    balls = [Ball(back) for i in range(100)]
     game_world.add_objects(balls, 1)
 
 

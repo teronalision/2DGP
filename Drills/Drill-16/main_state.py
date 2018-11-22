@@ -40,6 +40,7 @@ def enter():
 
     global back
     back = FixedBackground()
+    back.set_center_object(boy)
     game_world.add_object(back, 0)
 
     global balls

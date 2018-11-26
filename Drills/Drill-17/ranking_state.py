@@ -1,10 +1,11 @@
 from pico2d import *
 import world_build_state
-
-
+import game_framework
 
 
 name = "RankingState"
+
+now_time = 0.0
 
 
 def enter():
@@ -20,18 +21,16 @@ def handle_events():
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-                game_framework.quit()
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_n:
-            create_new_world()
-            game_framework.change_state(main_state)
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_l:
-            load_saved_world()
-            game_framework.change_state(main_state)
+                game_framework.change_state(world_build_state)
+
 
 def update():
     pass
 
 def draw():
     clear_canvas()
-    menu.draw(get_canvas_width()//2, get_canvas_height()//2)
+
+
+
+
     update_canvas()

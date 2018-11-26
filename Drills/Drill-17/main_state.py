@@ -8,6 +8,7 @@ import game_framework
 import game_world
 import zombie
 import world_build_state
+import ranking_state
 
 name = "MainState"
 
@@ -61,7 +62,8 @@ def update():
         game_object.update()
 
         if isinstance(game_object, zombie.Zombie) and collide(boy, game_object):
-            pass
+            ranking_state.now_time = get_time() - boy.start_time
+            game_framework.change_state(ranking_state)
 
 
 def draw():

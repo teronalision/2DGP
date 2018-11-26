@@ -6,7 +6,7 @@ import os
 from pico2d import *
 import game_framework
 import game_world
-
+import zombie
 import world_build_state
 
 name = "MainState"
@@ -59,6 +59,9 @@ def handle_events():
 def update():
     for game_object in game_world.all_objects():
         game_object.update()
+
+        if isinstance(game_object, zombie.Zombie) and collide(boy, game_object):
+            pass
 
 
 def draw():

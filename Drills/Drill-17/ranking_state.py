@@ -9,8 +9,11 @@ name = "RankingState"
 
 now_time = 0.0
 ranking_list = []
-
+font = None
 def enter():
+    font = load_font('ENCR10B.TTF', 20)
+    load_rank()
+    save_rank()
     pass
 
 def exit():
@@ -27,15 +30,18 @@ def handle_events():
 
 def save_rank():
     global ranking_list
-    ranking_list += now_time
+    ranking_list += [now_time]
 
-    with open('rank.sav', 'a') as f:
-        pickle.dump(ranking_list, f)
+    with open('rank.sav', 'w') as f:
+        pickle.dumps(str(ranking_list), f)
     pass
 
 
 def load_rank():
+    global ranking_list
 
+    with open('rank.sav', 'r') as f:
+        ranking_list = pickle.load(f)
     pass
 
 
@@ -45,7 +51,9 @@ def update():
 def draw():
     clear_canvas()
 
-
+    if font != None:
+        for score in ranking_list:
+            font.draw(500,500,'(#1 %3.2r)' % score, (0,0,0))
 
 
     update_canvas()

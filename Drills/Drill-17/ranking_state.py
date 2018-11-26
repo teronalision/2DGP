@@ -33,7 +33,7 @@ def save_rank():
     ranking_list += [now_time]
 
     with open('rank.sav', 'w') as f:
-        pickle.dumps(str(ranking_list), f)
+        pickle.dumps(ranking_list, f)
     pass
 
 
@@ -41,7 +41,7 @@ def load_rank():
     global ranking_list
 
     with open('rank.sav', 'r') as f:
-        ranking_list = pickle.load(f)
+        ranking_list = pickle.loads(f)
     pass
 
 
